@@ -1,0 +1,24 @@
+-Xms6g
+-Xmx6g
+-XX:+UseParNewGC
+-XX:+UseConcMarkSweepGC
+-XX:CMSInitiatingOccupancyFraction=75
+-XX:+UseCMSInitiatingOccupancyOnly
+-XX:+HeapDumpOnOutOfMemoryError
+#-XX:HeapDumpPath=${ELASTIC_HOME}/heapdump.hprof
+
+## GC logging
+#-XX:+PrintGCDetails
+#-XX:+PrintGCTimeStamps
+#-XX:+PrintGCDateStamps
+#-XX:+PrintClassHistogram
+#-XX:+PrintTenuringDistribution
+#-XX:+PrintGCApplicationStoppedTime
+
+# log GC status to a file with time stamps
+# ensure the directory exists
+#-Xloggc:${LS_GC_LOG_FILE}
+
+# Entropy source for randomness
+-Djava.security.egd=file:/dev/urandom
+-Dlog4j2.disable.jmx=true

@@ -1,0 +1,12 @@
+<patterndb version='4' pub_date='2010-10-17'>
+    <ruleset name='ssh' id='123456678'>
+        <pattern>Traffic</pattern>
+            <rules>
+                <rule provider='me' id='182437592347598' class='system'>
+                    <patterns>
+                        <pattern>@ESTRING:f5.pre:,@@ESTRING:f5.if:,@@ESTRING:f5.policy:,@@ESTRING:f5.rule:,@@ESTRING:f5.proto:,@@ESTRING:f5.addr1:,@@ESTRING:f5.port1:,@@ESTRING:f5.addr2:,@@ESTRING:f5.port2:,@@ESTRING:f5.action:,@@ESTRING:f5.psrc:,@@ESTRING:f5.post:@</pattern>
+                    </patterns>
+                </rule>
+            </rules>
+    </ruleset>
+</patterndb>

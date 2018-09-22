@@ -1,0 +1,15 @@
+---
+# Default Kibana configuration from kibana-docker.
+
+server.name: kibana
+server.host: "0"
+#elasticsearch.url: http://elasticsearch:9200
+elasticsearch.url: http://sbols_olsengine:9200
+#elasticsearch.url: http://10.176.1.157:9200
+#elasticsearch.url: http://localhost:9200
+#elasticsearch.username: elastic
+#elasticsearch.username: kibana
+#elasticsearch.password: changeme
+
+timelion.enabled: false
+kibana.defaultAppId: discover

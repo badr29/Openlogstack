@@ -1,0 +1,26 @@
+network.host: 0.0.0.0
+#discovery.zen.ping.unicast.hosts: sbols_olsengine
+discovery.zen.ping.unicast.hosts: [ "sbols_olsengine", "sbols_olsengine2", "sbols_olsengine3", "sbols_olsengine4", "sbols_olsengine5", "sbols_olsengine6"] 
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 2
+#xpack.license.self_generated.type: basic
+#xpack.security.enabled: false
+
+#node.master: false
+#node.data: true
+#node.ingest: false 
+
+thread_pool:
+    search:
+        size: 30
+        queue_size: 100000
+        min_queue_size: 10
+        max_queue_size: 100000
+        auto_queue_frame_size: 10000
+
+path:
+    data: /elasticsearch-data
+
+processors: 8

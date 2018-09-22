@@ -1,0 +1,458 @@
+version: "3.4"
+services:
+  olsengine:
+    image: bazillasoft/ols-elastic:1.0.1
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - discovery.zen.ping.unicast.hosts="olsengine2"
+      - network.host="olsengine"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /mnt/ssd/sb/drives/olsengine1/data:/elasticsearch-data:rw
+    ports:
+      - 9200:9200
+    networks:
+      - olsnet-swarm
+    configs:
+      - source: elastic-data
+        target: /etc/elasticsearch/elasticsearch.yml
+        uid: '999'
+        gid: '998'
+        mode: 0440
+      - source: elastic-data-jvmoptions
+        target: /etc/elasticsearch/jvm.options
+        uid: '999'
+        gid: '998'
+        mode: 0440
+    command:
+        - "sudo"
+        - "-u"
+        - "elasticsearch"
+        - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+        - "/usr/share/elasticsearch/bin/elasticsearch"
+
+  olsengine2:
+    image: bazillasoft/ols-elastic:1.0.1
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "discovery.zen.ping.unicast.hosts=olsengine"
+      - "network.host=olsengine2"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /mnt/ssd/sb/drives/olsengine2/data:/elasticsearch-data:rw
+    ports:
+      - 9201:9200
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+#      endpoint_mode: dnsrr
+    configs:
+      - source: elastic-data
+        target: /etc/elasticsearch/elasticsearch.yml
+        uid: '999'
+        gid: '998'
+        mode: 0440
+      - source: elastic-data-jvmoptions
+        target: /etc/elasticsearch/jvm.options
+        uid: '999'
+        gid: '998'
+        mode: 0440
+    command:
+        - "sudo"
+        - "-u"
+        - "elasticsearch"
+        - "/usr/share/elasticsearch/bin/elasticsearch"
+
+  olsengine3: 
+    image: bazillasoft/ols-elastic:1.0.1 
+    privileged: true 
+    cap_add: 
+      - SYS_ADMIN 
+    environment: 
+      - cluster.name=elasticsearch 
+      - bootstrap.memory_lock=true 
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g" 
+      - "discovery.zen.ping.unicast.hosts=olsengine" 
+      - "network.host=olsengine2" 
+    ulimits: 
+      memlock: 
+        soft: -1 
+        hard: -1 
+    volumes: 
+      - /mnt/ssd/sb/drives/olsengine3/data:/elasticsearch-data:rw
+    ports: 
+      - 9202:9200 
+    networks: 
+      - olsnet-swarm 
+    deploy: 
+      replicas: 1 
+#      endpoint_mode: dnsrr 
+    configs: 
+      - source: elastic-data 
+        target: /etc/elasticsearch/elasticsearch.yml 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+      - source: elastic-data-jvmoptions 
+        target: /etc/elasticsearch/jvm.options 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+    command: 
+        - "sudo" 
+        - "-u" 
+        - "elasticsearch" 
+        - "/usr/share/elasticsearch/bin/elasticsearch" 
+
+  olsengine4: 
+    image: bazillasoft/ols-elastic:1.0.1 
+    privileged: true 
+    cap_add: 
+      - SYS_ADMIN 
+    environment: 
+      - cluster.name=elasticsearch 
+      - bootstrap.memory_lock=true 
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g" 
+      - "discovery.zen.ping.unicast.hosts=olsengine" 
+      - "network.host=olsengine2" 
+    ulimits: 
+      memlock: 
+        soft: -1 
+        hard: -1 
+    volumes: 
+      - /mnt/ssd/sb/drives/olsengine4/data:/elasticsearch-data:rw
+    ports: 
+      - 9203:9200 
+    networks: 
+      - olsnet-swarm 
+    deploy: 
+      replicas: 1 
+#      endpoint_mode: dnsrr 
+    configs: 
+      - source: elastic-data 
+        target: /etc/elasticsearch/elasticsearch.yml 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+      - source: elastic-data-jvmoptions 
+        target: /etc/elasticsearch/jvm.options 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+    command: 
+        - "sudo" 
+        - "-u" 
+        - "elasticsearch" 
+        - "/usr/share/elasticsearch/bin/elasticsearch" 
+
+  olsengine5: 
+    image: bazillasoft/ols-elastic:1.0.1 
+    privileged: true 
+    cap_add: 
+      - SYS_ADMIN 
+    environment: 
+      - cluster.name=elasticsearch 
+      - bootstrap.memory_lock=true 
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g" 
+      - "discovery.zen.ping.unicast.hosts=olsengine" 
+      - "network.host=olsengine2" 
+    ulimits: 
+      memlock: 
+        soft: -1 
+        hard: -1 
+    volumes: 
+      - /mnt/ssd/sb/drives/olsengine5/data:/elasticsearch-data:rw
+    ports: 
+      - 9204:9200 
+    networks: 
+      - olsnet-swarm 
+    deploy: 
+      replicas: 1 
+#      endpoint_mode: dnsrr 
+    configs: 
+      - source: elastic-data 
+        target: /etc/elasticsearch/elasticsearch.yml 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+      - source: elastic-data-jvmoptions 
+        target: /etc/elasticsearch/jvm.options 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+    command: 
+        - "sudo" 
+        - "-u" 
+        - "elasticsearch" 
+        - "/usr/share/elasticsearch/bin/elasticsearch" 
+
+  olsengine6: 
+    image: bazillasoft/ols-elastic:1.0.1 
+    privileged: true 
+    cap_add: 
+      - SYS_ADMIN 
+    environment: 
+      - cluster.name=elasticsearch 
+      - bootstrap.memory_lock=true 
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g" 
+      - "discovery.zen.ping.unicast.hosts=olsengine" 
+      - "network.host=olsengine2" 
+    ulimits: 
+      memlock: 
+        soft: -1 
+        hard: -1 
+    volumes: 
+      - /mnt/ssd/sb/drives/olsengine6/data:/elasticsearch-data:rw
+    ports: 
+      - 9205:9200 
+    networks: 
+      - olsnet-swarm 
+    deploy: 
+      replicas: 1 
+#      endpoint_mode: dnsrr 
+    configs: 
+      - source: elastic-data 
+        target: /etc/elasticsearch/elasticsearch.yml 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+      - source: elastic-data-jvmoptions 
+        target: /etc/elasticsearch/jvm.options 
+        uid: '999' 
+        gid: '998' 
+        mode: 0440 
+    command: 
+        - "sudo" 
+        - "-u" 
+        - "elasticsearch" 
+        - "/usr/share/elasticsearch/bin/elasticsearch" 
+
+
+
+  syslog-ng1:
+    image: bazillasoft/syslg-both:1.0.0
+    #image: syslog-ng:d_kafka_v2
+    privileged: true
+    user: root
+    volumes:
+      - esdataSyslog1:/mnt/ssd/sb/drives/syslog1/data
+      - /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf:/etc/syslog-ng/syslog-ng.conf
+      - /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml:/opt/syslog-ng/var/db/patterndb.xml
+      - /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml:/etc/syslog-ng/log4j.xml
+    ports:
+      - 40001:40001/udp
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+#      endpoint_mode: dnsrr
+#      resources:
+#        limits:
+#           cpus: '0.11' # 4 cpus share
+#           memory: 12G
+#        reservations:
+#           cpus: '0.05' # 2 cpus share
+#           memory: 5G
+#    configs:
+#      - source: syslogng-conf
+#        target: /etc/syslog-ng/syslog-ng.conf
+#      - source: syslogng-patterndb
+#        target: /opt/syslog-ng/var/db/patterndb.xml
+#      - source: syslogng-log4j
+#        target: /etc/syslog-ng/log4j.xml 
+#    command:
+#        - "bash"
+#        - "-c"
+#        - "/root/start.sh"
+
+  syslog-ng2:
+    image: bazillasoft/syslg-both:1.0.0
+    #image: syslog-ng:d_kafka_v2
+    privileged: true
+    user: root
+    volumes:
+      - esdataSyslog2:/mnt/ssd/sb/drives/syslog2/data
+      - /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf:/etc/syslog-ng/syslog-ng.conf
+      - /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml:/opt/syslog-ng/var/db/patterndb.xml
+      - /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml:/etc/syslog-ng/log4j.xml
+    ports:
+      - 40002:40001/udp
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+
+  syslog-ng3:
+    image: bazillasoft/syslg-both:1.0.0
+    #image: syslog-ng:d_kafka_v2
+    privileged: true
+    user: root
+    volumes:
+      - esdataSyslog3:/mnt/ssd/sb/drives/syslog3/data
+      - /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf:/etc/syslog-ng/syslog-ng.conf
+      - /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml:/opt/syslog-ng/var/db/patterndb.xml
+      - /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml:/etc/syslog-ng/log4j.xml
+    ports:
+      - 40003:40001/udp
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+
+  syslog-ng4:
+    image: bazillasoft/syslg-both:1.0.0
+    #image: syslog-ng:d_kafka_v2
+    privileged: true
+    user: root
+    volumes:
+      - esdataSyslog4:/mnt/ssd/sb/drives/syslog4/data
+      - /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf:/etc/syslog-ng/syslog-ng.conf
+      - /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml:/opt/syslog-ng/var/db/patterndb.xml
+      - /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml:/etc/syslog-ng/log4j.xml
+    ports:
+      - 40004:40001/udp
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+
+  syslog-ng5:
+    image: bazillasoft/syslg-both:1.0.0
+    #image: syslog-ng:d_kafka_v2
+    privileged: true
+    user: root
+    volumes:
+      - esdataSyslog5:/mnt/ssd/sb/drives/syslog4/data
+      - /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf:/etc/syslog-ng/syslog-ng.conf
+      - /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml:/opt/syslog-ng/var/db/patterndb.xml
+      - /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml:/etc/syslog-ng/log4j.xml
+    ports:
+      - 40005:40001/udp
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+
+  syslog-ng6:
+    image: bazillasoft/syslg-both:1.0.0
+    #image: syslog-ng:d_kafka_v2
+    privileged: true
+    user: root
+    volumes:
+      - esdataSyslog6:/mnt/ssd/sb/drives/syslog4/data
+      - /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf:/etc/syslog-ng/syslog-ng.conf
+      - /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml:/opt/syslog-ng/var/db/patterndb.xml
+      - /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml:/etc/syslog-ng/log4j.xml
+    ports:
+      - 40006:40001/udp
+    networks:
+      - olsnet-swarm
+    deploy:
+      replicas: 1
+
+  kibana1:
+    image: bazillasoft/ols-lie:1.0.1
+    volumes:
+      - esdataKibana:/mnt/ssd/sb/drives/kibana/data
+    ports:
+      - 5601:5601
+    networks:
+      - olsnet-swarm
+    configs:
+      - source: kibana
+        target: /usr/share/kibana/config/kibana.yml
+        uid: '999'
+        gid: '998'
+        mode: 0440
+    command:
+        - "sudo"
+        - "-u"
+        - "kibana"
+        - "/usr/share/kibana/bin/kibana"
+volumes:
+  esdata1:
+    driver: local
+  esdata2:
+    driver: local
+  esdata3:
+    driver: local
+  esdata4:
+    driver: local
+  esdata5:
+    driver: local
+  esdata6:
+    driver: local
+  esdata7:
+    driver: local
+  esdata8:
+    driver: local
+  esdata9:
+    driver: local
+  esdata10:
+    driver: local
+  esdata11:
+    driver: local
+  esdata12:
+    driver: local
+  esdata13:
+    driver: local
+  esdata14:
+    driver: local
+  esdata15:
+    driver: local
+  esdataKibana:
+    driver: local
+  esdataLogstash1:
+    driver: local
+  esdataLogstash2:
+    driver: local
+  esdataSyslog1:
+    driver: local
+  esdataSyslog2:
+    driver: local
+  esdataSyslog3:
+    driver: local
+  esdataSyslog4:
+    driver: local
+  esdataSyslog5:
+    driver: local
+  esdataSyslog6:
+    driver: local
+
+configs:
+  elastic-master:
+    file: ./conf/elasticsearch_master.yml
+  elastic-data:
+    file: ./conf/elasticsearch_data.yml
+  elastic-data-jvmoptions:
+    file: ./conf/elasticsearch_data_jvm.options
+  kibana:
+    file: ./conf/kibana.yml
+  syslogng-conf:
+    file: /home/ubuntu/sb/dswarm/syslog-ng1/syslog-ng1.elasticDest.conf
+  syslogng-patterndb:
+    file: /home/ubuntu/sb/dswarm/syslog-ng1/patterndb.xml
+  syslogng-log4j:
+    file: /home/ubuntu/sb/dswarm/syslog-ng1/log4j.xml
+
+networks:
+  olsnet-swarm:
+   external:
+     name: olsnet-swarm
